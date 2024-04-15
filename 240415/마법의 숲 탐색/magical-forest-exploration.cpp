@@ -145,8 +145,8 @@ int bfs(int y, int x) {
 			if (Map[ny][nx] != front.from && Map[ny][nx] != -1 * front.from && front.superpass != 1) continue;
 			visited[ny][nx] = 1;
 
-			if (Map[ny][nx] == -1 * front.from) {
-				q1.push({ ny, nx, front.from, 1 });
+			if (Map[ny][nx] < 0) {
+				q1.push({ ny, nx, Map[ny][nx] * -1, 1});
 			}
 			q1.push({ ny, nx,  Map[ny][nx], 0 });
 		}
