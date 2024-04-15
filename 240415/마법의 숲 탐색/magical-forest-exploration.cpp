@@ -146,13 +146,13 @@ int bfs(int y, int x) {
 			visited[ny][nx] = 1;
 
 			if (Map[ny][nx] < 0) {
-				q1.push({ ny, nx, Map[ny][nx] * -1, 1});
+				q1.push({ ny, nx, Map[ny][nx] * -1, 1 });
 			}
 			q1.push({ ny, nx,  Map[ny][nx], 0 });
 		}
 	}
 
-	return lowest - 1;
+	return lowest - 2;
 }
 
 void init() {
@@ -161,7 +161,7 @@ void init() {
 
 void input() {
 	cin >> num1 >> num2 >> num3;
-	num1 = num1 + 2;
+	num1 = num1 + 3;
 
 	for (int n1 = 0; n1 < num3; n1++) {
 		cin >> golem[n1].x >> golem[n1].out;
