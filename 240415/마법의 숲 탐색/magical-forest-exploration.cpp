@@ -145,14 +145,14 @@ int bfs(int y, int x) {
 			if (Map[ny][nx] != front.from && Map[ny][nx] != -1 * front.from && front.superpass != 1) continue;
 			visited[ny][nx] = 1;
 
-			if (Map[ny][nx] < 0) {
-				q1.push({ ny, nx, Map[ny][nx] * -1, 1});
+			if (Map[ny][nx] == -1 * front.from) {
+				q1.push({ ny, nx, front.from, 1 });
 			}
 			q1.push({ ny, nx,  Map[ny][nx], 0 });
 		}
 	}
 
-	return lowest;
+	return lowest - 1;
 }
 
 void init() {
@@ -161,12 +161,12 @@ void init() {
 
 void input() {
 	cin >> num1 >> num2 >> num3;
-	num1 = num1 + 1;
+	num1 = num1 + 2;
 
 	for (int n1 = 0; n1 < num3; n1++) {
 		cin >> golem[n1].x >> golem[n1].out;
 		golem[n1].x--;
-		golem[n1].y = 0;
+		golem[n1].y = 1;
 	}
 }
 
@@ -216,7 +216,7 @@ void solve() {
 			}
 		}
 
-		if (goy <= 1 || gox == 0 || gox == num2 - 1) {
+		if (goy <= 2) {
 			memset(Map, 0, sizeof(Map));
 			continue;
 		}
