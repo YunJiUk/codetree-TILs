@@ -216,7 +216,7 @@ void solve() {
 			}
 		}
 
-		if (goy <= 2) {
+		if (goy <= 3) {
 			memset(Map, 0, sizeof(Map));
 			continue;
 		}
