@@ -152,7 +152,7 @@ int bfs(int y, int x) {
 		}
 	}
 
-	return lowest - 1;
+	return lowest;
 }
 
 void init() {
@@ -161,12 +161,12 @@ void init() {
 
 void input() {
 	cin >> num1 >> num2 >> num3;
-	num1 = num1 + 2;
+	num1 = num1 + 1;
 
 	for (int n1 = 0; n1 < num3; n1++) {
 		cin >> golem[n1].x >> golem[n1].out;
 		golem[n1].x--;
-		golem[n1].y = 1;
+		golem[n1].y = 0;
 	}
 }
 
@@ -216,7 +216,7 @@ void solve() {
 			}
 		}
 
-		if (goy <= 2) {
+		if (goy <= 1 || gox == 0 || gox == num2 - 1) {
 			memset(Map, 0, sizeof(Map));
 			continue;
 		}
