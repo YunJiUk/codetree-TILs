@@ -1,6 +1,5 @@
 #include <iostream>
 #include <queue>
-#include <cstring>
 
 using namespace std;
 
@@ -152,7 +151,7 @@ int bfs(int y, int x) {
 		}
 	}
 
-	return lowest;
+	return lowest - 1;
 }
 
 void init() {
@@ -161,7 +160,7 @@ void init() {
 
 void input() {
 	cin >> num1 >> num2 >> num3;
-	num1 = num1 + 1;
+	num1 = num1 + 2;
 
 	for (int n1 = 0; n1 < num3; n1++) {
 		cin >> golem[n1].x >> golem[n1].out;
@@ -189,10 +188,7 @@ void solve() {
 			}
 		}
 
-		if (sry == 1) {
-			memset(Map, 0, sizeof(Map));
-			continue;
-		}
+	
 
 		godown();
 
@@ -219,7 +215,7 @@ void solve() {
 			}
 		}
 
-		if (goy == 1) {
+		if (goy == 2) {
 			memset(Map, 0, sizeof(Map));
 			continue;
 		}
