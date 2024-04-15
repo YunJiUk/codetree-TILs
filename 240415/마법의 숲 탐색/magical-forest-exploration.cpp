@@ -125,7 +125,7 @@ int bfs(int y, int x) {
 	int lowest = -1;
 	int visited[75][75] = { 0, };
 	queue<Node2> q1;
-	q1.push({ y, x, Map[y][x]});
+	q1.push({ y, x, Map[y][x] });
 	visited[y][x] = 1;
 
 	while (!q1.empty()) {
@@ -146,9 +146,9 @@ int bfs(int y, int x) {
 			visited[ny][nx] = 1;
 
 			if (Map[ny][nx] == -1 * front.from) {
-				q1.push({ ny, nx, front.from, 1});
+				q1.push({ ny, nx, front.from, 1 });
 			}
-			q1.push({ ny, nx,  Map[ny][nx], 0});
+			q1.push({ ny, nx,  Map[ny][nx], 0 });
 		}
 	}
 
@@ -189,7 +189,7 @@ void solve() {
 			}
 		}
 
-	
+
 
 		godown();
 
@@ -197,10 +197,10 @@ void solve() {
 
 		while (1) {
 			int a = goleft();
-			
+
 			if (a == -1) {
 				int b = goright();
-				
+
 				if (b == -1) {
 					break;
 				}
@@ -216,7 +216,7 @@ void solve() {
 			}
 		}
 
-		if (goy == 2) {
+		if (goy <= 2) {
 			memset(Map, 0, sizeof(Map));
 			continue;
 		}
