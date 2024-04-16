@@ -147,8 +147,7 @@ void input() {
 			dijkstra(realStart);
 
 
-			for (auto& a1 : um1) {
-				a1.second.start = chnum;
+			for (const auto& a1 : um1) {
 
 				int Far = record[realStart][a1.second.to];
 				if (Far == 0 && realStart != a1.second.to) {
