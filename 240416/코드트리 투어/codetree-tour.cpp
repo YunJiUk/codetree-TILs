@@ -39,6 +39,7 @@ int Go;
 
 vector<Node> bil[2200];
 int visited[2200];
+int record[2200][2200];
 unordered_map <int, Node2> um1;
 
 void dijkstra(int starting) {
@@ -77,11 +78,23 @@ void input() {
 	cin >> num1;
 	cin >> asd;
 	cin >> num2 >> num3;
+
+
 	for (int n1 = 0; n1 < num3; n1++) {
 		cin >> Start >> To >> Weight;
 		bil[Start].push_back({ Start, To, Weight });
 		if (Start != To) {
 			bil[To].push_back({ To, Start, Weight });
+		}
+
+
+	}
+
+	for (int n1 = 0; n1 < num2; n1++) {
+		dijkstra(n1);
+
+		for (int n2 = 0; n2 < num2; n2++) {
+			record[n1][n2] = visited[n2];
 		}
 	}
 
@@ -89,8 +102,7 @@ void input() {
 		cin >> num4;
 		if (num4 == 200) {
 			cin >> Id >> Price >> Go;
-			dijkstra(realStart);
-			int Far = visited[Go];
+			int Far = record[realStart][Go];
 			um1[Id] = { realStart, Go, Far, Price };
 		}
 
@@ -132,8 +144,7 @@ void input() {
 			realStart = chnum;
 			for (auto& a1 : um1) {
 				a1.second.start = chnum;
-				dijkstra(realStart);
-				int Far = visited[a1.second.to];
+				int Far = record[realStart][a1.second.to];
 				um1[a1.first] = { realStart, a1.second.to, Far, a1.second.price };
 			}
 		}
@@ -153,7 +164,7 @@ int main() {
 	cin.tie(0);
 	cout.tie(0);
 
-	//freopen("input1.txt", "r", stdin);
+	freopen("input1.txt", "r", stdin);
 
 	init();
 
