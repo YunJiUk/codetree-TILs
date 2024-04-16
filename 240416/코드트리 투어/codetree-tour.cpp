@@ -64,6 +64,8 @@ void dijkstra(int starting) {
 			if (visited[bil[top.to][n1].to] <= checking) continue;
 			q1.push({ top.to, bil[top.to][n1].to, checking });
 			visited[bil[top.to][n1].to] = checking;
+			record[realStart][bil[top.to][n1].to] = checking;
+			record[bil[top.to][n1].to][realStart] = checking;
 		}
 	}
 
@@ -94,12 +96,6 @@ void input() {
 			cin >> Id >> Price >> Go;
 			if (record[realStart][Go] == 0) {
 				dijkstra(realStart);
-
-
-				for (int n2 = 0; n2 < num2; n2++) {
-					record[realStart][n2] = visited[n2];
-					record[n2][realStart] = visited[n2];
-				}
 			}
 			int Far = record[realStart][Go];
 			um1[Id] = { realStart, Go, Far, Price };
