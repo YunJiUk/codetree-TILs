@@ -96,7 +96,7 @@ void input() {
 				dijkstra(realStart);
 
 
-				for (int n2 = n1 + 1; n2 < num2; n2++) {
+				for (int n2 = 0; n2 < num2; n2++) {
 					record[realStart][n2] = visited[n2];
 					record[n2][realStart] = visited[n2];
 				}
@@ -148,7 +148,7 @@ void input() {
 					dijkstra(realStart);
 
 
-					for (int n2 = n1 + 1; n2 < num2; n2++) {
+					for (int n2 = 0; n2 < num2; n2++) {
 						record[realStart][n2] = visited[n2];
 						record[n2][realStart] = visited[n2];
 					}
