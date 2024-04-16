@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <queue>
+#include <list>
 #include <climits>
 
 using namespace std;
@@ -44,30 +45,36 @@ int record[2200][2200];
 unordered_map <int, Node2> um1;
 
 void dijkstra(int starting) {
-	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> q1;
-	fill(visited, visited + num2, INT_MAX);
-	visited[starting] = 0;
-	q1.push({ 0, starting });
+	const int MAX_WEIGHT = 100;  // 가정: 최대 가중치는 100
+	vector<list<pair<int, int>>> buckets(num2 * MAX_WEIGHT);
+	int idx = 0;
 
-	while (!q1.empty()) {
-		int dist = q1.top().first;
-		int here = q1.top().second;
-		q1.pop();
+	vector<int> distance(num2, INT_MAX);
+	distance[starting] = 0;
+	buckets[0].push_back({ starting, 0 });
 
-		// 이미 방문한 노드와 거리가 더 긴 경우 스킵
-		if (dist > visited[here]) continue;
+	while (idx < buckets.size()) {
+		while (buckets[idx].empty() && idx < buckets.size()) idx++;
+		if (idx == buckets.size()) break;
 
-		for (auto& edge : bil[here]) {
-			int next = edge.to;
-			int nextDist = dist + edge.weight;
-			if (visited[next] > nextDist) {
-				visited[next] = nextDist;
-				q1.push({ nextDist, next });
+		while (!buckets[idx].empty()) {
+			int here = buckets[idx].front().first;
+			int dist = buckets[idx].front().second;
+			buckets[idx].pop_front();
+
+			if (dist > distance[here]) continue;
+
+			for (auto& edge : bil[here]) {
+				int next = edge.to;
+				int nextDist = dist + edge.weight;
+				if (distance[next] > nextDist) {
+					distance[next] = nextDist;
+					buckets[nextDist].push_back({ next, nextDist });
+				}
 			}
 		}
 	}
 }
-
 
 
 void init() {
