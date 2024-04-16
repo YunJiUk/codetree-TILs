@@ -86,24 +86,21 @@ void input() {
 		if (Start != To) {
 			bil[To].push_back({ To, Start, Weight });
 		}
-
-
-	}
-
-	for (int n1 = 0; n1 < num2; n1++) {
-		dijkstra(n1);
-
-
-		for (int n2 = n1; n2 < num2; n2++) {
-			record[n1][n2] = visited[n2];
-			record[n2][n1] = visited[n2];
-		}
 	}
 
 	for (int n1 = 0; n1 < num1 - 1; n1++) {
 		cin >> num4;
 		if (num4 == 200) {
 			cin >> Id >> Price >> Go;
+			if (record[realStart][Go] == 0) {
+				dijkstra(realStart);
+
+
+				for (int n2 = n1 + 1; n2 < num2; n2++) {
+					record[realStart][n2] = visited[n2];
+					record[n2][realStart] = visited[n2];
+				}
+			}
 			int Far = record[realStart][Go];
 			um1[Id] = { realStart, Go, Far, Price };
 		}
@@ -144,8 +141,18 @@ void input() {
 			int chnum;
 			cin >> chnum;
 			realStart = chnum;
+			
 			for (auto& a1 : um1) {
 				a1.second.start = chnum;
+				if (record[realStart][a1.second.to] == 0) {
+					dijkstra(realStart);
+
+
+					for (int n2 = n1 + 1; n2 < num2; n2++) {
+						record[realStart][n2] = visited[n2];
+						record[n2][realStart] = visited[n2];
+					}
+				}
 				int Far = record[realStart][a1.second.to];
 				um1[a1.first] = { realStart, a1.second.to, Far, a1.second.price };
 			}
@@ -166,7 +173,7 @@ int main() {
 	cin.tie(0);
 	cout.tie(0);
 
-	//freopen("input1.txt", "r", stdin);
+	freopen("input1.txt", "r", stdin);
 
 	init();
 
