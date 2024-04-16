@@ -168,7 +168,7 @@ void solve() {
 
 int main() {
 
-	freopen("input2.txt", "r", stdin);
+	//freopen("input2.txt", "r", stdin);
 
 	init();
 
