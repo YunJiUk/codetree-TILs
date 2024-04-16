@@ -96,7 +96,7 @@ void input() {
 		cin >> num4;
 		if (num4 == 200) {
 			cin >> Id >> Price >> Go;
-			if (record[realStart][Go] == 0) {
+			if (record[realStart][Go] == 0 && realStart != Go) {
 				dijkstra(realStart);
 			}
 			int Far = record[realStart][Go];
@@ -145,7 +145,7 @@ void input() {
 
 			for (auto& a1 : um1) {
 				a1.second.start = chnum;
-				if (record[realStart][a1.second.to] == 0) {
+				if (record[realStart][a1.second.to] == 0 && realStart!= a1.second.to) {
 					dijkstra(realStart);
 				}
 				int Far = record[realStart][a1.second.to];
