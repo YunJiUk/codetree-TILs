@@ -49,13 +49,12 @@ void dijkstra(int starting) {
 
 	priority_queue<Node> q1;
 	visited[starting] = 0;
-	record[starting][starting] = 0;
 	for (int n1 = 0; n1 < bil[starting].size(); n1++) {
 		if (visited[bil[starting][n1].to] <= bil[starting][n1].weight) continue;
 		q1.push({ bil[starting][n1] });
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
-		record[starting][bil[starting][n1].to] = bil[starting][n1].weight;
-		record[bil[starting][n1].to][starting] = bil[starting][n1].weight;
+		record[realStart][bil[starting][n1].to] = bil[starting][n1].weight;
+		record[bil[starting][n1].to][realStart] = bil[starting][n1].weight;
 	}
 
 	while (!q1.empty()) {
@@ -67,8 +66,8 @@ void dijkstra(int starting) {
 			if (visited[bil[top.to][n1].to] <= checking) continue;
 			q1.push({ top.to, bil[top.to][n1].to, checking });
 			visited[bil[top.to][n1].to] = checking;
-			record[starting][bil[top.to][n1].to] = checking;
-			record[bil[top.to][n1].to][starting] = checking;
+			record[realStart][bil[top.to][n1].to] = checking;
+			record[bil[top.to][n1].to][realStart] = checking;
 		}
 	}
 
@@ -172,7 +171,7 @@ int main() {
 	cin.tie(0);
 	cout.tie(0);
 
-	//freopen("input3.txt", "r", stdin);
+	//freopen("input1.txt", "r", stdin);
 
 	init();
 
