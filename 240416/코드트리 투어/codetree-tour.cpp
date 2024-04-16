@@ -55,7 +55,7 @@ void dijkstra(int starting) {
 		q1.push({ bil[starting][n1] });
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
 		record[starting][bil[starting][n1].to] = bil[starting][n1].weight;
-		record[bil[bil[starting][n1].to][n1].to][starting] = bil[starting][n1].weight;
+		record[bil[starting][n1].to][starting] = bil[starting][n1].weight;
 	}
 
 	while (!q1.empty()) {
