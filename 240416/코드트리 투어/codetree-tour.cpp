@@ -42,19 +42,23 @@ int visited[2200];
 int record[2200][2200];
 unordered_map <int, Node2> um1;
 
-void dijkstra(int starting) {
+void dijkstra(int starting, int tar) {
 	for (int n1 = 0; n1 < num2; n1++) {
 		visited[n1] = 2134567890;
 	}
 
 	priority_queue<Node> q1;
 	visited[starting] = 0;
+	record[starting][starting] = 0;
 	for (int n1 = 0; n1 < bil[starting].size(); n1++) {
 		if (visited[bil[starting][n1].to] <= bil[starting][n1].weight) continue;
-		q1.push({ bil[starting][n1] });
+		
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
-		record[realStart][bil[starting][n1].to] = bil[starting][n1].weight;
-		record[bil[starting][n1].to][realStart] = bil[starting][n1].weight;
+		record[starting][bil[starting][n1].to] = bil[starting][n1].weight;
+		record[bil[starting][n1].to][starting] = bil[starting][n1].weight;
+		if (bil[starting][n1].to == tar) continue;
+
+		q1.push({ bil[starting][n1] });
 	}
 
 	while (!q1.empty()) {
@@ -64,10 +68,14 @@ void dijkstra(int starting) {
 		for (int n1 = 0; n1 < bil[top.to].size(); n1++) {
 			int checking = bil[top.to][n1].weight + visited[top.to];
 			if (visited[bil[top.to][n1].to] <= checking) continue;
-			q1.push({ top.to, bil[top.to][n1].to, checking });
+			
 			visited[bil[top.to][n1].to] = checking;
-			record[realStart][bil[top.to][n1].to] = checking;
-			record[bil[top.to][n1].to][realStart] = checking;
+			record[starting][bil[top.to][n1].to] = checking;
+			record[bil[top.to][n1].to][starting] = checking;
+			if (bil[top.to][n1].to == tar) continue;
+
+
+			q1.push({ top.to, bil[top.to][n1].to, checking });
 		}
 	}
 
@@ -92,13 +100,13 @@ void input() {
 		}
 	}
 
-	dijkstra(realStart);
-
 	for (int n1 = 0; n1 < num1 - 1; n1++) {
 		cin >> num4;
 		if (num4 == 200) {
 			cin >> Id >> Price >> Go;
-
+			if (record[realStart][Go] == 0) {
+				dijkstra(realStart, Go);
+			}
 			int Far = record[realStart][Go];
 			if (Far == 0 && realStart != Go) {
 				Far = 2134567890;
@@ -143,13 +151,11 @@ void input() {
 			cin >> chnum;
 			realStart = chnum;
 
-
-			dijkstra(realStart);
-
-
 			for (auto& a1 : um1) {
 				a1.second.start = chnum;
-				
+				if (record[realStart][a1.second.to] == 0) {
+					dijkstra(realStart, a1.second.to);
+				}
 				int Far = record[realStart][a1.second.to];
 				if (Far == 0 && realStart != a1.second.to) {
 					Far = 2134567890;
@@ -169,8 +175,11 @@ void solve() {
 }
 
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
 
-	//freopen("input2.txt", "r", stdin);
+	//freopen("input1.txt", "r", stdin);
 
 	init();
 
