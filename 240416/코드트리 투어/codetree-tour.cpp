@@ -49,10 +49,13 @@ void dijkstra(int starting) {
 
 	priority_queue<Node> q1;
 	visited[starting] = 0;
+	record[starting][starting] = 0;
 	for (int n1 = 0; n1 < bil[starting].size(); n1++) {
 		if (visited[bil[starting][n1].to] <= bil[starting][n1].weight) continue;
 		q1.push({ bil[starting][n1] });
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
+		record[starting][bil[starting][n1].to] = bil[starting][n1].weight;
+		record[bil[bil[starting][n1].to][n1].to][starting] = bil[starting][n1].weight;
 	}
 
 	while (!q1.empty()) {
@@ -64,8 +67,8 @@ void dijkstra(int starting) {
 			if (visited[bil[top.to][n1].to] <= checking) continue;
 			q1.push({ top.to, bil[top.to][n1].to, checking });
 			visited[bil[top.to][n1].to] = checking;
-			record[realStart][bil[top.to][n1].to] = checking;
-			record[bil[top.to][n1].to][realStart] = checking;
+			record[starting][bil[top.to][n1].to] = checking;
+			record[bil[top.to][n1].to][starting] = checking;
 		}
 	}
 
@@ -98,6 +101,9 @@ void input() {
 				dijkstra(realStart);
 			}
 			int Far = record[realStart][Go];
+			if (Far == 0 && realStart != Go) {
+				Far = 2134567890;
+			}
 			um1[Id] = { realStart, Go, Far, Price };
 		}
 
@@ -142,14 +148,11 @@ void input() {
 				a1.second.start = chnum;
 				if (record[realStart][a1.second.to] == 0) {
 					dijkstra(realStart);
-
-
-					for (int n2 = 0; n2 < num2; n2++) {
-						record[realStart][n2] = visited[n2];
-						record[n2][realStart] = visited[n2];
-					}
 				}
 				int Far = record[realStart][a1.second.to];
+				if (Far == 0 && realStart != a1.second.to) {
+					Far = 2134567890;
+				}
 				um1[a1.first] = { realStart, a1.second.to, Far, a1.second.price };
 			}
 		}
