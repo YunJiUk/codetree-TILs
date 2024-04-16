@@ -42,7 +42,7 @@ int visited[2200];
 unordered_map <int, Node2> um1;
 
 void dijkstra(int starting) {
-	for (int n1 = 0; n1 < 2200; n1++) {
+	for (int n1 = 0; n1 < num2; n1++) {
 		visited[n1] = 2134567890;
 	}
 
@@ -136,8 +136,6 @@ void input() {
 				int Far = visited[a1.second.to];
 				um1[a1.first] = { realStart, a1.second.to, Far, a1.second.price };
 			}
-
-
 		}
 	}
 
