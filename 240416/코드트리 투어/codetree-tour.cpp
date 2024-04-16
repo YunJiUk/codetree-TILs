@@ -53,6 +53,8 @@ void dijkstra(int starting) {
 		if (visited[bil[starting][n1].to] <= bil[starting][n1].weight) continue;
 		q1.push({ bil[starting][n1] });
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
+		record[realStart][bil[starting][n1].to] = bil[starting][n1].weight;
+		record[bil[starting][n1].to][realStart] = bil[starting][n1].weight;
 	}
 
 	while (!q1.empty()) {
@@ -64,6 +66,8 @@ void dijkstra(int starting) {
 			if (visited[bil[top.to][n1].to] <= checking) continue;
 			q1.push({ top.to, bil[top.to][n1].to, checking });
 			visited[bil[top.to][n1].to] = checking;
+			record[realStart][bil[top.to][n1].to] = checking;
+			record[bil[top.to][n1].to][realStart] = checking;
 		}
 	}
 
@@ -78,8 +82,8 @@ void input() {
 	cin >> num1;
 	cin >> asd;
 	cin >> num2 >> num3;
-	
-	
+
+
 	for (int n1 = 0; n1 < num3; n1++) {
 		cin >> Start >> To >> Weight;
 		bil[Start].push_back({ Start, To, Weight });
@@ -90,18 +94,15 @@ void input() {
 
 	dijkstra(realStart);
 
-
-	for (int n2 = 1; n2 < num2; n2++) {
-		record[realStart][n2] = visited[n2];
-		record[n2][realStart] = visited[n2];
-	}
-
 	for (int n1 = 0; n1 < num1 - 1; n1++) {
 		cin >> num4;
 		if (num4 == 200) {
 			cin >> Id >> Price >> Go;
 
 			int Far = record[realStart][Go];
+			if (Far == 0 && realStart != Go) {
+				Far = 2134567890;
+			}
 			um1[Id] = { realStart, Go, Far, Price };
 		}
 
@@ -141,17 +142,18 @@ void input() {
 			int chnum;
 			cin >> chnum;
 			realStart = chnum;
+
+
 			dijkstra(realStart);
 
-			for (int n2 = 0; n2 < num2; n2++) {
-				record[realStart][n2] = visited[n2];
-				record[n2][realStart] = visited[n2];
-			}
 
 			for (auto& a1 : um1) {
 				a1.second.start = chnum;
 				
 				int Far = record[realStart][a1.second.to];
+				if (Far == 0 && realStart != a1.second.to) {
+					Far = 2134567890;
+				}
 				um1[a1.first] = { realStart, a1.second.to, Far, a1.second.price };
 			}
 		}
@@ -167,11 +169,8 @@ void solve() {
 }
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
 
-	//freopen("input1.txt", "r", stdin);
+	//freopen("input2.txt", "r", stdin);
 
 	init();
 
