@@ -54,7 +54,7 @@ void dijkstra(int starting) {
 		q1.push({ bil[starting][n1] });
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
 		record[realStart][bil[starting][n1].to] = bil[starting][n1].weight;
-		record[bil[starting][n1].to][realStart] = bil[starting][n1].weight;
+		//record[bil[starting][n1].to][realStart] = bil[starting][n1].weight;
 	}
 
 	while (!q1.empty()) {
@@ -67,7 +67,7 @@ void dijkstra(int starting) {
 			q1.push({ top.to, bil[top.to][n1].to, checking });
 			visited[bil[top.to][n1].to] = checking;
 			record[realStart][bil[top.to][n1].to] = checking;
-			record[bil[top.to][n1].to][realStart] = checking;
+			//record[bil[top.to][n1].to][realStart] = checking;
 		}
 	}
 
@@ -96,10 +96,10 @@ void input() {
 		cin >> num4;
 		if (num4 == 200) {
 			cin >> Id >> Price >> Go;
-			if (record[realStart][Go] == 0 && realStart != Go) {
+			if (record[realStart][Go] == 0 && record[Go][realStart] == 0) {
 				dijkstra(realStart);
 			}
-			int Far = record[realStart][Go];
+			int Far = max(record[realStart][Go], record[Go][realStart]);
 			if (Far == 0 && realStart != Go) {
 				Far = 2134567890;
 			}
@@ -145,10 +145,10 @@ void input() {
 
 			for (auto& a1 : um1) {
 				a1.second.start = chnum;
-				if (record[realStart][a1.second.to] == 0 && realStart!= a1.second.to) {
+				if (record[realStart][a1.second.to] == 0 && record[a1.second.to][realStart] == 0) {
 					dijkstra(realStart);
 				}
-				int Far = record[realStart][a1.second.to];
+				int Far = max(record[realStart][a1.second.to], record[a1.second.to][realStart]);
 				if (Far == 0 && realStart != a1.second.to) {
 					Far = 2134567890;
 				}
