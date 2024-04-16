@@ -101,6 +101,13 @@ void input() {
 					min = a1.second.price - a1.second.weight;
 					minidx = a1.first;
 				}
+
+				else if (a1.second.price - a1.second.weight == min) {
+					if (a1.first < minidx) {
+						min = a1.second.price - a1.second.weight;
+						minidx = a1.first;
+					}
+				}
 			}
 
 			if (min == -1) {
