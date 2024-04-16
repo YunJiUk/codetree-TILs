@@ -36,7 +36,7 @@ int Id;
 int Price;
 int Go;
 
-
+int dat[2200];
 vector<Node> bil[2200];
 int visited[2200];
 int record[2200][2200];
@@ -53,8 +53,7 @@ void dijkstra(int starting) {
 		if (visited[bil[starting][n1].to] <= bil[starting][n1].weight) continue;
 		q1.push({ bil[starting][n1] });
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
-		record[realStart][bil[starting][n1].to] = bil[starting][n1].weight;
-		record[bil[starting][n1].to][realStart] = bil[starting][n1].weight;
+		
 	}
 
 	while (!q1.empty()) {
@@ -66,8 +65,7 @@ void dijkstra(int starting) {
 			if (visited[bil[top.to][n1].to] <= checking) continue;
 			q1.push({ top.to, bil[top.to][n1].to, checking });
 			visited[bil[top.to][n1].to] = checking;
-			record[realStart][bil[top.to][n1].to] = checking;
-			record[bil[top.to][n1].to][realStart] = checking;
+
 		}
 	}
 
@@ -93,6 +91,12 @@ void input() {
 	}
 
 	dijkstra(realStart);
+	dat[0] = 1;
+
+	for (int n1 = 0; n1 < num2; n1++) {
+		record[n1][realStart] = visited[n1];
+		record[realStart][n1] = visited[n1];
+	}
 
 	for (int n1 = 0; n1 < num1 - 1; n1++) {
 		cin >> num4;
@@ -144,7 +148,15 @@ void input() {
 			realStart = chnum;
 
 
-			dijkstra(realStart);
+			if (dat[realStart] == 0) {
+				dijkstra(realStart);
+
+				for (int n1 = 0; n1 < num2; n1++) {
+					record[n1][realStart] = visited[n1];
+					record[realStart][n1] = visited[n1];
+				}
+				dat[realStart] = 1;
+			}
 
 
 			for (const auto& a1 : um1) {
