@@ -53,8 +53,6 @@ void dijkstra(int starting) {
 		if (visited[bil[starting][n1].to] <= bil[starting][n1].weight) continue;
 		q1.push({ bil[starting][n1] });
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
-		record[realStart][bil[starting][n1].to] = bil[starting][n1].weight;
-		record[bil[starting][n1].to][realStart] = bil[starting][n1].weight;
 	}
 
 	while (!q1.empty()) {
@@ -66,8 +64,6 @@ void dijkstra(int starting) {
 			if (visited[bil[top.to][n1].to] <= checking) continue;
 			q1.push({ top.to, bil[top.to][n1].to, checking });
 			visited[bil[top.to][n1].to] = checking;
-			record[realStart][bil[top.to][n1].to] = checking;
-			record[bil[top.to][n1].to][realStart] = checking;
 		}
 	}
 
@@ -98,11 +94,14 @@ void input() {
 			cin >> Id >> Price >> Go;
 			if (record[realStart][Go] == 0) {
 				dijkstra(realStart);
+
+
+				for (int n2 = 0; n2 < num2; n2++) {
+					record[realStart][n2] = visited[n2];
+					record[n2][realStart] = visited[n2];
+				}
 			}
 			int Far = record[realStart][Go];
-			if (Far == 0 && realStart != Go) {
-				Far = 2134567890;
-			}
 			um1[Id] = { realStart, Go, Far, Price };
 		}
 
@@ -147,11 +146,14 @@ void input() {
 				a1.second.start = chnum;
 				if (record[realStart][a1.second.to] == 0) {
 					dijkstra(realStart);
+
+
+					for (int n2 = 0; n2 < num2; n2++) {
+						record[realStart][n2] = visited[n2];
+						record[n2][realStart] = visited[n2];
+					}
 				}
 				int Far = record[realStart][a1.second.to];
-				if (Far == 0 && realStart != a1.second.to) {
-					Far = 2134567890;
-				}
 				um1[a1.first] = { realStart, a1.second.to, Far, a1.second.price };
 			}
 		}
@@ -168,7 +170,8 @@ void solve() {
 
 int main() {
 
-	//freopen("input2.txt", "r", stdin);
+
+	//freopen("input1.txt", "r", stdin);
 
 	init();
 
