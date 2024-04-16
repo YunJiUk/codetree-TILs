@@ -50,9 +50,10 @@ void dijkstra(int starting) {
 	visited[starting] = 0;
 	for (int n1 = 0; n1 < bil[starting].size(); n1++) {
 		q1.push({ bil[starting][n1] });
+		if (visited[bil[starting][n1].to] < bil[starting][n1].weight) continue;
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
 	}
-	
+
 	while (!q1.empty()) {
 		Node top = q1.top();
 		q1.pop();
@@ -136,11 +137,11 @@ void input() {
 				um1[a1.first] = { realStart, a1.second.to, Far, a1.second.price };
 			}
 
-			
+
 		}
 	}
 
-	
+
 
 
 }
