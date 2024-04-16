@@ -56,6 +56,7 @@ void dijkstra(int starting, int tar) {
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
 		record[starting][bil[starting][n1].to] = bil[starting][n1].weight;
 		record[bil[starting][n1].to][starting] = bil[starting][n1].weight;
+		if (bil[starting][n1].to == tar) continue;
 
 		q1.push({ bil[starting][n1] });
 	}
@@ -71,7 +72,7 @@ void dijkstra(int starting, int tar) {
 			visited[bil[top.to][n1].to] = checking;
 			record[starting][bil[top.to][n1].to] = checking;
 			record[bil[top.to][n1].to][starting] = checking;
-			if (bil[top.to][n1].to == tar) continue;
+
 
 
 			q1.push({ top.to, bil[top.to][n1].to, checking });
