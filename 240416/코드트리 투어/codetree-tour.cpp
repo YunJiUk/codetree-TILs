@@ -172,7 +172,7 @@ int main() {
 	cin.tie(0);
 	cout.tie(0);
 
-	freopen("input3.txt", "r", stdin);
+	//freopen("input3.txt", "r", stdin);
 
 	init();
 
