@@ -43,33 +43,30 @@ int record[2200][2200];
 unordered_map <int, Node2> um1;
 
 void dijkstra(int starting) {
-	for (int n1 = 0; n1 < num2; n1++) {
-		visited[n1] = 2134567890;
-	}
-
-	priority_queue<Node> q1;
+	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> q1;
+	fill(visited, visited + num2, INT_MAX);
 	visited[starting] = 0;
-	for (int n1 = 0; n1 < bil[starting].size(); n1++) {
-		if (visited[bil[starting][n1].to] <= bil[starting][n1].weight) continue;
-		q1.push({ bil[starting][n1] });
-		visited[bil[starting][n1].to] = bil[starting][n1].weight;
-		
-	}
+	q1.push({ 0, starting });
 
 	while (!q1.empty()) {
-		Node top = q1.top();
+		int dist = q1.top().first;
+		int here = q1.top().second;
 		q1.pop();
 
-		for (int n1 = 0; n1 < bil[top.to].size(); n1++) {
-			int checking = bil[top.to][n1].weight + visited[top.to];
-			if (visited[bil[top.to][n1].to] <= checking) continue;
-			q1.push({ top.to, bil[top.to][n1].to, checking });
-			visited[bil[top.to][n1].to] = checking;
+		// 이미 방문한 노드와 거리가 더 긴 경우 스킵
+		if (dist > visited[here]) continue;
 
+		for (auto& edge : bil[here]) {
+			int next = edge.to;
+			int nextDist = dist + edge.weight;
+			if (visited[next] > nextDist) {
+				visited[next] = nextDist;
+				q1.push({ nextDist, next });
+			}
 		}
 	}
-
 }
+
 
 
 void init() {
