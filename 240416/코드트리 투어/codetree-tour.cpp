@@ -42,7 +42,7 @@ int visited[2200];
 int record[2200][2200];
 unordered_map <int, Node2> um1;
 
-void dijkstra(int starting, int goingto) {
+void dijkstra(int starting) {
 	for (int n1 = 0; n1 < num2; n1++) {
 		visited[n1] = 2134567890;
 	}
@@ -50,8 +50,8 @@ void dijkstra(int starting, int goingto) {
 	priority_queue<Node> q1;
 	visited[starting] = 0;
 	for (int n1 = 0; n1 < bil[starting].size(); n1++) {
+		if (visited[bil[starting][n1].to] <= bil[starting][n1].weight) continue;
 		q1.push({ bil[starting][n1] });
-		if (visited[bil[starting][n1].to] < bil[starting][n1].weight) continue;
 		visited[bil[starting][n1].to] = bil[starting][n1].weight;
 	}
 
@@ -62,10 +62,8 @@ void dijkstra(int starting, int goingto) {
 		for (int n1 = 0; n1 < bil[top.to].size(); n1++) {
 			int checking = bil[top.to][n1].weight + visited[top.to];
 			if (visited[bil[top.to][n1].to] <= checking) continue;
-			visited[bil[top.to][n1].to] = checking;
-
-			if (bil[top.to][n1].to == goingto) continue;
 			q1.push({ top.to, bil[top.to][n1].to, checking });
+			visited[bil[top.to][n1].to] = checking;
 		}
 	}
 
@@ -95,11 +93,10 @@ void input() {
 		if (num4 == 200) {
 			cin >> Id >> Price >> Go;
 			if (record[realStart][Go] == 0) {
-				dijkstra(realStart, Go);
+				dijkstra(realStart);
 
 
 				for (int n2 = 0; n2 < num2; n2++) {
-					if (visited[n2] == 2134567890) continue;
 					record[realStart][n2] = visited[n2];
 					record[n2][realStart] = visited[n2];
 				}
@@ -148,11 +145,10 @@ void input() {
 			for (auto& a1 : um1) {
 				a1.second.start = chnum;
 				if (record[realStart][a1.second.to] == 0) {
-					dijkstra(realStart, a1.second.to);
+					dijkstra(realStart);
 
 
 					for (int n2 = 0; n2 < num2; n2++) {
-						if (visited[n2] == 2134567890) continue;
 						record[realStart][n2] = visited[n2];
 						record[n2][realStart] = visited[n2];
 					}
@@ -177,7 +173,7 @@ int main() {
 	cin.tie(0);
 	cout.tie(0);
 
-	//freopen("input2.txt", "r", stdin);
+	//freopen("input1.txt", "r", stdin);
 
 	init();
 
