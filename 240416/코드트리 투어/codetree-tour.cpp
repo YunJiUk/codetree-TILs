@@ -93,8 +93,10 @@ void input() {
 	for (int n1 = 0; n1 < num2; n1++) {
 		dijkstra(n1);
 
-		for (int n2 = 0; n2 < num2; n2++) {
+
+		for (int n2 = n1; n2 < num2; n2++) {
 			record[n1][n2] = visited[n2];
+			record[n2][n1] = visited[n2];
 		}
 	}
 
