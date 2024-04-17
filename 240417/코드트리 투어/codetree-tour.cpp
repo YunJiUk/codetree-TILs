@@ -43,12 +43,12 @@ int Id;
 int Price;
 int Go;
 
-int dat[2200];
-int datId[2200];
+int dat[2000];
+int datId[30000];
 vector<Node> bil[2200];
 int visited[2200];
 int record[2200][2200];
-unordered_map <int, Node2> um1;
+
 priority_queue<Node2> pq1;
 
 
