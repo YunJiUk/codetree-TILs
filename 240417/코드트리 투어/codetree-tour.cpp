@@ -126,7 +126,7 @@ void input() {
 
 			if (datId[pq1.top().id] == 0) cout << -1 << "\n";
 
-			if (pq1.top().price - pq1.top().weight < 0) {
+			else if (pq1.top().price - pq1.top().weight < 0) {
 				cout << -1 << "\n";
 			}
 
