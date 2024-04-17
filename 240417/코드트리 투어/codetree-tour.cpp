@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <queue>
 #include <climits>
 
@@ -19,10 +19,16 @@ struct Node {
 };
 
 struct Node2 {
+	int id;
 	int start;
 	int to;
 	int weight;
 	int price;
+
+	bool operator <(Node2 right) const {
+		if (price - weight < right.price - right.weight) return true;
+		return false;
+	}
 };
 
 int realStart = 0;
@@ -38,10 +44,13 @@ int Price;
 int Go;
 
 int dat[2200];
+int datId[2200];
 vector<Node> bil[2200];
 int visited[2200];
 int record[2200][2200];
-map <int, Node2> um1;
+unordered_map <int, Node2> um1;
+priority_queue<Node2> pq1;
+
 
 void dijkstra(int starting) {
 	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> q1;
@@ -90,6 +99,7 @@ void input() {
 
 	dijkstra(realStart);
 	dat[0] = 1;
+	
 
 	for (int n1 = 0; n1 < num2; n1++) {
 		record[n1][realStart] = visited[n1];
@@ -100,44 +110,43 @@ void input() {
 		cin >> num4;
 		if (num4 == 200) {
 			cin >> Id >> Price >> Go;
+			datId[Id] = 1;
 
 			int Far = record[realStart][Go];
 			if (Far == 0 && realStart != Go) {
 				Far = 2134567890;
 			}
-			um1[Id] = { realStart, Go, Far, Price };
+
+			pq1.push({ Id, realStart, Go, Far, Price });
 		}
 
 		else if (num4 == 400) {
 			int min = -1;
 			int minidx = -1;
-			for (const auto& a1 : um1) {
-				if (a1.second.price - a1.second.weight > min) {
-					min = a1.second.price - a1.second.weight;
-					minidx = a1.first;
-				}
-			}
 
-			if (min == -1) {
+			if (datId[pq1.top().id] == 0) cout << -1 << "\n";
+
+			if (pq1.top().price - pq1.top().weight < 0) {
 				cout << -1 << "\n";
 			}
+
 			else {
-				cout << minidx << "\n";
-				um1.erase(minidx);
+				cout << pq1.top().id << "\n";
+				pq1.pop();
 			}
 		}
 
 		else if (num4 == 300) {
 			int eridx;
 			cin >> eridx;
-			um1.erase(eridx);
+			datId[eridx] = 0;
 		}
 
 		else if (num4 == 500) {
 			int chnum;
 			cin >> chnum;
 			realStart = chnum;
-
+			priority_queue<Node2> pq2;
 
 			if (dat[realStart] == 0) {
 				dijkstra(realStart);
@@ -149,15 +158,19 @@ void input() {
 				dat[realStart] = 1;
 			}
 
+			while (!pq1.empty()) {
+				Node2 top = pq1.top();
 
-			for (const auto& a1 : um1) {
-
-				int Far = record[realStart][a1.second.to];
-				if (Far == 0 && realStart != a1.second.to) {
+				int Far = record[realStart][top.to];
+				if (Far == 0 && realStart != top.to) {
 					Far = 2134567890;
 				}
-				um1[a1.first] = { realStart, a1.second.to, Far, a1.second.price };
+				pq2.push({ top.id , top.start, top.to, Far, top.price });
+				pq1.pop();
 			}
+
+
+			pq1 = pq2;
 		}
 	}
 
