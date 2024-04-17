@@ -26,6 +26,10 @@ struct Node2 {
 	int price;
 
 	bool operator <(Node2 right) const {
+		if (price - weight == right.price - right.weight) {
+			if (id > right.id) return true;
+			return false;
+		}
 		if (price - weight < right.price - right.weight) return true;
 		return false;
 	}
