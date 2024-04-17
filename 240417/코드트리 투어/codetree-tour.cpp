@@ -128,9 +128,11 @@ void input() {
 			int min = -1;
 			int minidx = -1;
 
-			if (datId[pq1.top().id] == 0) cout << -1 << "\n";
+			while (datId[pq1.top().id] == 0) {
+				pq1.pop();
+			}
 
-			else if (pq1.top().price - pq1.top().weight < 0) {
+			if (pq1.top().price - pq1.top().weight < 0) {
 				cout << -1 << "\n";
 			}
 
