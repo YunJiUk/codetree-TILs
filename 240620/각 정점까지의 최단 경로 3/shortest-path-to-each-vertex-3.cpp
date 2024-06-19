@@ -75,7 +75,10 @@ void solve() {
     dijkstra();
 
     for (int n1 = 2; n1 <= num1; n1++) {
-        cout << visited[n1] << endl;
+        if (visited[n1] == 2134567890) {
+            cout << -1 << endl;
+        }
+        else cout << visited[n1] << endl;
     }
 }
 
