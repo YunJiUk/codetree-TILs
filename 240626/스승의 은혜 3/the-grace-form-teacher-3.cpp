@@ -14,7 +14,6 @@ struct Node {
 };
 
 vector<Node> box;
-vector<Node> box2;
 
 bool sortFunc(Node left, Node right) {
     if ((left.price + left.deliver) < (right.price + right.deliver)) return true;
@@ -28,7 +27,6 @@ void init() {
 void input() {
     cin >> num1 >> num2;
     box.resize(num1);
-    box2.resize(num1);
 
     for (int n1 = 0; n1 < num1; n1++) {
         cin >> box[n1].price >> box[n1].deliver;
