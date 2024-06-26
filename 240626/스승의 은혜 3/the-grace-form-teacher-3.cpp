@@ -41,14 +41,14 @@ void solve() {
 
     for (int n1 = 0; n1 < num1; n1++) {
         int cnt = 0;
-        int startseed = box[n1].halfprice;
+        int startseed = box[n1].halfprice + box[n1].deliver;
         if (startseed > num2) continue;
 
         cnt++;
 
         for (int n2 = 0; n2 < num1; n2++) {
             if (n2 == n1) continue;
-            startseed += box[n2].price;
+            startseed += box[n2].price + box[n2].deliver;
             if (startseed < num2) {
                 cnt++;
             }
