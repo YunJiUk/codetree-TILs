@@ -48,7 +48,7 @@ void solve() {
 
     for (auto item : um1) {
         if (um2[item.first * -1] != 0) {
-            ans += min(item.second, um2[item.first * -1]);
+            ans += item.second * um2[item.first * -1];
         }
     }
 }
