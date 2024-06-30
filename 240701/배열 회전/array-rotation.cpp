@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int num1, num2, num3;
+double num1, num2, num3;
 
 double Map[330][330];
 double ansMap[330][330];
