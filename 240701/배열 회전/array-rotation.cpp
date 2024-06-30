@@ -61,7 +61,7 @@ void solve(){
 
         cnt++;
 
-        int len = q1.size();
+        int len = q2.size();
         int mv = num3 % len;
 
         for(int n1 = mv; n1 < q2.size(); n1++){
