@@ -6,8 +6,8 @@ using namespace std;
 
 int num1, num2, num3;
 
-int Map[330][330];
-int ansMap[330][330];
+int Map[550][550];
+int ansMap[550][550];
 
 struct Node{
     int y;
