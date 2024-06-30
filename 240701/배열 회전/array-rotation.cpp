@@ -1,5 +1,6 @@
 #include <iostream>
-#include <deque>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -8,71 +9,88 @@ int num1, num2, num3;
 int Map[330][330];
 int ansMap[330][330];
 
-struct Node {
-    int y, x;
-};
-
-void init() {
-    // 필요시 초기화 코드를 여기에 작성
-}
-
 void input() {
     cin >> num1 >> num2 >> num3;
-    for (int n1 = 0; n1 < num1; n1++) {
-        for (int n2 = 0; n2 < num2; n2++) {
-            cin >> Map[n1][n2];
+    for (int i = 0; i < num1; i++) {
+        for (int j = 0; j < num2; j++) {
+            cin >> Map[i][j];
         }
+    }
+}
+
+void rotateLayer(int layer) {
+    int top = layer;
+    int bottom = num1 - layer - 1;
+    int left = layer;
+    int right = num2 - layer - 1;
+
+    // Calculate the perimeter of the current layer
+    int perimeter = 2 * (bottom - top + right - left);
+
+    // Calculate effective rotations
+    int rotations = num3 % perimeter;
+
+    // If no rotations are needed, return
+    if (rotations == 0) return;
+
+    vector<int> temp;
+
+    // Copy the layer into a temporary array in counterclockwise order
+    for (int i = left; i <= right; i++) {
+        temp.push_back(Map[top][i]);
+    }
+    for (int i = top + 1; i <= bottom; i++) {
+        temp.push_back(Map[i][right]);
+    }
+    for (int i = right - 1; i >= left; i--) {
+        temp.push_back(Map[bottom][i]);
+    }
+    for (int i = bottom - 1; i > top; i--) {
+        temp.push_back(Map[i][left]);
+    }
+
+    // Rotate the temporary array counterclockwise
+    rotate(temp.begin(), temp.begin() + rotations, temp.end());
+
+    // Copy the rotated array back to the ansMap
+    int index = 0;
+    for (int i = left; i <= right; i++) {
+        ansMap[top][i] = temp[index++];
+    }
+    for (int i = top + 1; i <= bottom; i++) {
+        ansMap[i][right] = temp[index++];
+    }
+    for (int i = right - 1; i >= left; i--) {
+        ansMap[bottom][i] = temp[index++];
+    }
+    for (int i = bottom - 1; i > top; i--) {
+        ansMap[i][left] = temp[index++];
     }
 }
 
 void solve() {
-    int layers = min(num1, num2) / 2; // 각 레이어의 수
-
-    for (int layer = 0; layer < layers; layer++) {
-        deque<int> q1;
-        deque<Node> q2;
-
-        // 상단
-        for (int i = layer; i < num2 - layer; i++) {
-            q1.push_back(Map[layer][i]);
-            q2.push_back({layer, i});
-        }
-        // 우측
-        for (int i = layer + 1; i < num1 - layer; i++) {
-            q1.push_back(Map[i][num2 - layer - 1]);
-            q2.push_back({i, num2 - layer - 1});
-        }
-        // 하단
-        for (int i = num2 - layer - 2; i >= layer; i--) {
-            q1.push_back(Map[num1 - layer - 1][i]);
-            q2.push_back({num1 - layer - 1, i});
-        }
-        // 좌측
-        for (int i = num1 - layer - 2; i > layer; i--) {
-            q1.push_back(Map[i][layer]);
-            q2.push_back({i, layer});
-        }
-
-        int len = q1.size();
-        int mv = num3 % len;
-
-        // 회전한 값을 ansMap에 삽입
-        for (int i = 0; i < len; i++) {
-            int idx = (i + mv) % len;
-            ansMap[q2[i].y][q2[i].x] = q1[idx];
+    // Initialize ansMap with the original Map values
+    for (int i = 0; i < num1; i++) {
+        for (int j = 0; j < num2; j++) {
+            ansMap[i][j] = Map[i][j];
         }
     }
 
-    for (int n1 = 0; n1 < num1; n1++) {
-        for (int n2 = 0; n2 < num2; n2++) {
-            cout << ansMap[n1][n2] << " ";
+    int layers = min(num1, num2) / 2; // 각 레이어의 수
+
+    for (int layer = 0; layer < layers; layer++) {
+        rotateLayer(layer);
+    }
+
+    for (int i = 0; i < num1; i++) {
+        for (int j = 0; j < num2; j++) {
+            cout << ansMap[i][j] << " ";
         }
         cout << endl;
     }
 }
 
 int main() {
-    init();
     input();
     solve();
     return 0;
