@@ -4,10 +4,10 @@
 
 using namespace std;
 
-double num1, num2, num3;
+long num1, num2, num3;
 
-double Map[330][330];
-double ansMap[330][330];
+long Map[330][330];
+long ansMap[330][330];
 
 struct Node{
     int y;
