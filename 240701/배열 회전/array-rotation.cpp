@@ -9,8 +9,7 @@ int Map[550][550];
 int ansMap[550][550];
 
 struct Node {
-    int y;
-    int x;
+    int y, x;
 };
 
 void init() {
