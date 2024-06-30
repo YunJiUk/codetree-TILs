@@ -4,14 +4,14 @@
 
 using namespace std;
 
-long num1, num2, num3;
+long long num1, num2, num3;
 
 long Map[330][330];
 long ansMap[330][330];
 
 struct Node{
-    int y;
-    int x;
+    long long y;
+    long long x;
 };
 
 
@@ -31,7 +31,7 @@ void input(){
 }
 
 void solve(){
-    int cnt = 0;
+    long long cnt = 0;
     int checky = num1;
     int checkx = num2;
     while(1){
