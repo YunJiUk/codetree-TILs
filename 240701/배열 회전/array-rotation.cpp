@@ -31,11 +31,11 @@ void input(){
 }
 
 void solve(){
-    int cnt = 0;
+    int cnt = -1;
     int checky = num1;
     int checkx = num2;
     while(1){
-
+        cnt++;
         deque<int> q1;
         deque<Node> q2;
         for(int n1 = cnt; n1 < (num1 - cnt); n1++){
@@ -58,7 +58,7 @@ void solve(){
             q2.push_back({cnt, n1});
         }
 
-        cnt++;
+        
 
         int len = q1.size();
         int mv = num3 % len;
