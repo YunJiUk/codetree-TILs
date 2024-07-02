@@ -23,6 +23,12 @@ void input() {
 }
 
 void solve() {
+
+    if(num2 == 1){
+        cout << num1 * num1;
+        return;
+    }
+    
     for(int n1 = 0; n1 < num1; n1++){
         int cnt = 1;
         for(int n2 = 0; n2 < num1 - 1; n2++){
