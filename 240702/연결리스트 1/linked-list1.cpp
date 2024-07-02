@@ -34,6 +34,8 @@ void print(Node* tar) {
     cout << tar->data << " ";
 
     if (tar->next == nullptr) cout << n << "\n";
+
+    if (tar->prev == nullptr) cout << n << " ";
     else cout << tar->next->data << "\n";
 }
 
@@ -74,7 +76,7 @@ void input() {
         print(cur);
     }
 
-    
+
 }
 
 void solve() {
