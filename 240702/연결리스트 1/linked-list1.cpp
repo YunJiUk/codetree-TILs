@@ -20,10 +20,17 @@ void connect(Node* front, Node* back) {
     if (nullptr != back) back->prev = front;
 }
 
-void insert(Node* front, Node* back) {
+void insertback(Node* front, Node* back) {
     connect(back, front->next);
     connect(front, back);
 }
+
+void insertprev(Node* front, Node* back) {
+    connect(front->prev, back);
+    connect(back, front);
+}
+
+
 
 void print(Node* tar) {
     string n = "(Null)";
@@ -34,8 +41,6 @@ void print(Node* tar) {
     cout << tar->data << " ";
 
     if (tar->next == nullptr) cout << n << "\n";
-
-    if (tar->prev == nullptr) cout << n << " ";
     else cout << tar->next->data << "\n";
 }
 
@@ -55,12 +60,12 @@ void input() {
         if (num2 == 1) {
             cin >> str2;
             Node* cur2 = new Node(str2);
-            insert(cur2, cur);
+            insertprev(cur, cur2);
         }
         else if (num2 == 2) {
             cin >> str2;
             Node* cur2 = new Node(str2);
-            insert(cur, cur2);
+            insertback(cur, cur2);
         }
         else if (num2 == 3) {
             if (cur->prev != nullptr) {
