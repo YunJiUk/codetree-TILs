@@ -4,7 +4,7 @@ using namespace std;
 
 int num1, num2, num3, num4, num5;
 
-int cnt = 0;
+int realans = 0;
 
 int Map[10000][10000];
 
@@ -24,24 +24,40 @@ void input() {
 
 void solve() {
     for(int n1 = 0; n1 < num1; n1++){
+        int cnt = 1;
         for(int n2 = 0; n2 < num1 - 1; n2++){
             if(Map[n1][n2] == Map[n1][n2 + 1]){
                 cnt++;
+            }
+            else{
+                cnt = 1;
+            }
+
+            if(cnt >= num2){
+                realans++;
                 break;
             }
         }
     }
 
     for(int n1 = 0; n1 < num1; n1++){
+        int cnt = 1;
         for(int n2 = 0; n2 < num1 - 1; n2++){
             if(Map[n2][n1] == Map[n2 + 1][n1]){
                 cnt++;
+            }
+            else{
+                cnt = 1;
+            }
+
+            if(cnt >= num2){
+                realans++;
                 break;
             }
         }
     }
 
-    cout << cnt;
+    cout << realans;
 }
 
 int main() {
