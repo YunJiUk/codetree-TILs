@@ -26,7 +26,7 @@ void input(){
 }
 
 void solve(){
-    int ans = 0;
+    long long ans = 0;
     for(auto item : um1){
         ans += item.second;
     }
