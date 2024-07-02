@@ -29,11 +29,14 @@ void init(){
 
 void input(){
     cin >> num1 >> num2;
-    v1.resize(num1);
     for(int n1 = 0; n1 < num1; n1++){
         cin >> num3;
         um1[num3]++;
-        v1[n1] = {num3, um1[num3]};
+    }
+
+
+    for(auto item : um1){
+        v1.push_back({item.first, item.second});
     }
 }
 
