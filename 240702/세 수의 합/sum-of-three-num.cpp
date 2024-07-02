@@ -18,21 +18,20 @@ void init() {
 
 void input() {
     cin >> num1 >> num2;
+    int ans = 0;
     for (int n1 = 0; n1 < num1; n1++) {
         cin >> num3;
 
-        for (auto item : um2) {
-            um3[item.first + num3] += um2[item.first];
-        }
+        ans += um2[num2 - num3];
 
-        for (auto item : um1) {
-            um2[item.first + num3] += um1[item.first];
+        for(auto item: um1){
+            um2[item.first + num3] += item.second;
         }
 
         um1[num3]++;
     }
 
-    cout << um3[num2];
+    cout << ans;
 }
 
 void solve() {
