@@ -8,6 +8,11 @@ using namespace std;
 int num1, num2, num3;
 unordered_map<int, int> um1;
 
+struct Node {
+    int num;
+    int size;
+};
+
 
 void init() {
 
@@ -16,19 +21,19 @@ void init() {
 void input() {
     cin >> num1 >> num2;
     for (int n1 = 0; n1 < num1; n1++) {
-        vector<int> v1;
+        vector<Node> v1;
         cin >> num3;
-        um1[num3]++;
 
         for (auto item : um1) {
-            
-            if (item.first != num3) {
-                v1.push_back(item.first + num3);
-            }
+
+            v1.push_back({ item.first + num3, item.second });
+
         }
 
+        um1[num3]++;
+
         for (int n1 = 0; n1 < v1.size(); n1++) {
-            um1[v1[n1]]++;
+            um1[v1[n1].num] += v1[n1].size;
         }
     }
 
