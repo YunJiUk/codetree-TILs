@@ -16,7 +16,7 @@ void input(){
 
     for(int n1 = 0; n1 < num1; n1++){
         cin >> num2 >> num3;
-        if(um1[num2] == 0){
+        if(um1.find(num2) == um1.end()){
             um1[num2] = num3;
         }
         else if(um1[num2] > num3){
