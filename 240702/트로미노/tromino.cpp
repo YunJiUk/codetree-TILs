@@ -34,8 +34,8 @@ void input() {
 void solve() {
     int realans = -2134567890;
 
-    for (int n1 = 1; n1 < num1 - 1; n1++) {
-        for (int n2 = 1; n2 < num2 - 1; n2++) {
+    for (int n1 = 0; n1 < num1; n1++) {
+        for (int n2 = 0; n2 < num2; n2++) {
             int ans = 0;
 
             int ny1 = n1 + dy[arr2.p1];
