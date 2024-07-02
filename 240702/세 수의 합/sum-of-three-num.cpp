@@ -1,43 +1,50 @@
 #include <iostream>
+#include <vector>
 #include <unordered_map>
 
 using namespace std;
 
-#define MAX_N 1000
+int num1, num2;
+int num3;
 
-// 변수 선언
-int n, k;
-int arr[MAX_N];
-unordered_map<int, int> freq;
+unordered_map<int, int>um1;
+unordered_map<int, int>um2;
 
-int main() {
-    // 입력:
-    cin >> n >> k;
 
+void init() {
+
+}
+
+void input() {
+    cin >> num1 >> num2;
     int ans = 0;
+    for (int n1 = 0; n1 < num1; n1++) {
+        cin >> num3;
 
-    // 각 숫자가 몇 번씩 나왔는지를
-    // hashmap에 기록해줍니다.
-    for(int i = 0; i < n; i++) {
-        cin >> arr[i];
-        freq[arr[i]]++;
-    }
+        ans += um2[num2 - num3];
 
-    // 배열을 앞에서부터 순회하며 쌍을 만들어줍니다.
-    for(int i = 0; i < n; i++) {
-        // 이미 순회한 적이 있는 숫자는 빼 버림으로서
-        // 같은 조합이 여러번 세어지는 걸 방지합니다.
-        freq[arr[i]]--;
-
-        for(int j = 0; j < i; j++) {
-            // 전처리를 해주었기 때문에 이미 순회한 적 있는 값은 hashmap에 없습니다.
-            // 이와 같은 방식으로 같은 조합이 중복되어 세어지는 걸 방지할 수 있습니다.
-            if(freq.count(k - arr[i] - arr[j]) > 0)
-                ans += freq[k - arr[i] - arr[j]];
+        for(auto item: um1){
+            um2[item.first + num3] += item.second;
         }
+
+        um1[num3]++;
     }
 
     cout << ans;
+}
+
+void solve() {
+
+}
+
+int main() {
+    // 여기에 코드를 작성해주세요.
+
+    init();
+
+    input();
+
+    solve();
 
     return 0;
 }
