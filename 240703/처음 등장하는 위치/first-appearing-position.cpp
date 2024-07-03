@@ -15,7 +15,7 @@ void input(){
     cin >> num1;
     for(int n1 = 1; n1 <= num1; n1++){
         cin >> num2;
-        if(m1[num2] == 0){
+        if(m1.find(num2) == m1.end()){
             m1[num2] = n1;
         }
     }
