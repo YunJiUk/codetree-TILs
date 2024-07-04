@@ -25,7 +25,7 @@ void input(){
         cin >> num4;
         us2.insert(num4);
 
-        if(us1.find(num4) != us1.end()){
+        if(us1.find(num4) == us1.end()){
             us3.insert(num4);
         }
     }
@@ -33,7 +33,7 @@ void input(){
 
 void solve(){
     for(auto item : us1){
-        if(us2.find(item) != us2.end()){
+        if(us2.find(item) == us2.end()){
             us3.insert(item);
         }
     }
