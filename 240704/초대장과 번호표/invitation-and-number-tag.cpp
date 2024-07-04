@@ -44,7 +44,7 @@ void input() {
                 if (us1.find(v1[n1][n2]) == us1.end()) {
                     if (cnt == 1) {
                         flag = 1;
-                        continue;
+                        break;
                     }
                     ins = v1[n1][n2];
                     cnt++;
@@ -73,7 +73,7 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    
+
     init();
 
     input();
