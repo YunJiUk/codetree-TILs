@@ -1,84 +1,63 @@
 #include <iostream>
 #include <unordered_set>
+#include <queue>
 #include <vector>
 
 using namespace std;
 
-int num1, num2, num3, num4;
+#define MAX_N 100000
+#define MAX_G 250000
 
-vector<vector<int>> v1;
-
-unordered_set<int> us1;
-
-
-void init() {
-
-}
-
-void input() {
-
-    cin >> num1 >> num2;
-    v1.resize(num2);
-    us1.insert(1);
-
-    int ansflag = 0;
-    for (int n1 = 0; n1 < num2; n1++) {
-        cin >> num3;
-        v1[n1].resize(num3);
-
-
-        for (int n2 = 0; n2 < num3; n2++) {
-            cin >> num4;
-            v1[n1][n2] = num4;
-        }
-    }
-
-    while (1) {
-        int ansflag = 0;
-
-        for (int n1 = 0; n1 < num2; n1++) {
-            int cnt = 0;
-            int ins = 0;
-            int flag = 1;
-            for (int n2 = 0; n2 < v1[n1].size(); n2++) {
-                if (us1.find(v1[n1][n2]) == us1.end()) {
-                    if (cnt == 1) {
-                        flag = 1;
-                        break;
-                    }
-                    ins = v1[n1][n2];
-                    cnt++;
-                    flag = 0;
-                }
-            }
-            if (flag == 0) {
-                ansflag = 1;
-                us1.insert(ins);
-                break;
-            }
-        }
-
-        if (ansflag == 0) return;
-    }
-
-
-}
-
-void solve() {
-    cout << us1.size();
-}
+// 변수 선언
+int n, g;
+bool invited[MAX_N];
+// 각 그룹마다 초대장을 받지 못한 사람들을 관리해줍니다.
+unordered_set<int> groups[MAX_G];
+// 각 사람이 어떤 그룹에 속하는지를 관리해줍니다.
+vector<int> people_groups[MAX_N];
+queue<int> q;
+int ans;
 
 int main() {
-    // 여기에 코드를 작성해주세요.
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
+    // 입력:
+    cin >> n >> g;
 
-    init();
+    for(int i = 0; i < g; i++) {
+        int s, x;
+        cin >> s;
+        for(int j = 0; j < s; j++) {
+            cin >> x; x--;
+            groups[i].insert(x);
+            people_groups[x].push_back(i);
+        }
+    }
 
-    input();
+    q.push(0);
+    invited[0] = true;
+    while(!q.empty()) {
+        int x = q.front();
+        q.pop();
+        ans++;
 
-    solve();
+        // x가 들어있는 그룹에서 x를 지웁니다.
+        // hashset에는 그룹에서 초대받지 않은 인원만을 남깁니다.
+        for(int i = 0; i < (int) people_groups[x].size(); i++) {
+            int g_num = people_groups[x][i];
 
+            // 해당 그룹에서 x를 지웁니다.
+            groups[g_num].erase(x);
+            // 초대받지 않은 인원이 한명밖에 없다면 초대합니다.
+            if((int) groups[g_num].size() == 1) {
+                int p_num = *(groups[g_num].begin());
+                if(!invited[p_num]) {
+                    invited[p_num] = true;
+                    q.push(p_num);
+                }
+            }
+        }
+    }
+
+    // 초대장을 받는 인원을 출력합니다.
+    cout << ans;
     return 0;
 }
