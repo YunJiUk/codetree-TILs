@@ -70,6 +70,10 @@ void solve() {
 
 int main() {
     // 여기에 코드를 작성해주세요.
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
     init();
 
     input();
