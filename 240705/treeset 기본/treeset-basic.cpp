@@ -34,7 +34,7 @@ void input() {
                 cout << *s1.rbegin() << endl;
             }
             else{
-                cout << "None";
+                cout << "None" << endl;
             }
         }
 
@@ -74,7 +74,7 @@ void input() {
                 cout << *s1.upper_bound(num2) << endl;
             }
             else{
-                cout << "None";
+                cout << "None" << endl;
             }
         }
     }
