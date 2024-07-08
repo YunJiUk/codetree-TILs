@@ -27,7 +27,6 @@ int main() {
         }
 
         if (item2 != s1.end()) {
-            item2--;
 
             if ((*item2 - num3) > num2 && (*item2 - num3) < minans) {
                 minans = *item2 - num3;
