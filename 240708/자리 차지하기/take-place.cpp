@@ -13,13 +13,13 @@ int main() {
 
     int cnt = 0;
 
-    for(int n1 = 1; n1 <= num2; n1++){
+    for (int n1 = 1; n1 <= num2; n1++) {
         s1.insert(n1);
     }
 
-    for(int n1 = 0; n1 < num1; n1++){
+    for (int n1 = 0; n1 < num1; n1++) {
         cin >> num3;
-        if(s1.upper_bound(num3) == s1.begin()){
+        if (s1.upper_bound(num3) == s1.begin()) {
             cout << cnt;
             return 0;
         }
@@ -32,6 +32,8 @@ int main() {
 
         cnt++;
     }
+
+    cout << cnt;
 
     return 0;
 }
