@@ -14,6 +14,7 @@ void init(){
 void input(){
     cin >> num1;
     for(int n1 = 0; n1 < num1; n1++){
+        s1.clear();
         cin >> num2;
 
         for(int n2 = 0; n2 < num2; n2++){
