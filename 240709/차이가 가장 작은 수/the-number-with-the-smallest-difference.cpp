@@ -18,14 +18,14 @@ int main() {
         auto item = s1.upper_bound(num3);
 
         if (item != s1.end()) {
-            if ((*item - num3) > num2 && (*item - num3) < minans) {
+            if ((*item - num3) >= num2 && (*item - num3) < minans) {
                 minans = *item - num3;
             }
         }
 
         if (item != s1.begin()) {
             item--;
-            if ((num3 - *item) > num2 && (num3 - *item) < minans) {
+            if ((num3 - *item) >= num2 && (num3 - *item) < minans) {
                 minans = num3 - *item;
             }
         }
