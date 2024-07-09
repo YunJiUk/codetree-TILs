@@ -8,13 +8,11 @@ int minans = 2134567890;
 set<int> s1;
 
 int main() {
-
     cin >> num1 >> num2;
 
     for (int n1 = 0; n1 < num1; n1++) {
         cin >> num3;
         s1.insert(num3);
-
 
         auto item = s1.lower_bound(num3);
         auto item2 = s1.upper_bound(num3);
@@ -27,7 +25,6 @@ int main() {
         }
 
         if (item2 != s1.end()) {
-
             if ((*item2 - num3) > num2 && (*item2 - num3) < minans) {
                 minans = *item2 - num3;
             }
@@ -36,11 +33,9 @@ int main() {
 
     if (minans == 2134567890) {
         cout << -1;
-        return 0;
+    } else {
+        cout << minans;
     }
 
-    cout << minans;
-
-    // 여기에 코드를 작성해주세요.
     return 0;
 }
