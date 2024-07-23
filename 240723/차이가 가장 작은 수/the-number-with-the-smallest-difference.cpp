@@ -21,7 +21,7 @@ int main() {
         if(pointer2 != s1.begin()){
             pointer2--;
 
-            int check = num3 - pointer2;
+            int check = num3 - *pointer2;
             if(check >= num2 && maxans > check){
                 maxans = check;
             }
