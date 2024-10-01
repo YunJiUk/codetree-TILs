@@ -2,23 +2,31 @@
 #include <unordered_map>
 using namespace std;
 
-unordered_map<int,int> um;
+#define MAX_N 100000
 
-int n,k,tmp,ans;
-
+// 변수 선언
+int n, k;
+int arr[MAX_N];
+unordered_map<long long, int> count;
 int main() {
     // 여기에 코드를 작성해주세요.
-    cin>>n>>k;
-    for(int i=0;i<n;i++){
-        cin>>tmp;
-        um[tmp]+=1;
+     cin >> n >> k;
+    for(int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    int ans = 0;
+
+    // 배열을 앞에서부터 순회하며 쌍을 만들어줍니다.
+    for(int i = 0; i < n; i++) {
+        long long diff = (long long)k - arr[i];
+        // 가능한 모든 쌍의 수를 세어줍니다.
+        ans += count[diff];
+        //cout<<i<<" "<<diff<<" "<<count[diff]<<endl;
+
+        // 현재 숫자의 개수를 하나 증가시켜줍니다.
+        count[arr[i]]++;
     }
-    for(auto tmp_um:um){
-        if(k-tmp_um.first==tmp_um.first){
-            ans+=(um[k-tmp_um.first]*(um[k-tmp_um.first]-1));
-        }
-        else ans+=um[k-tmp_um.first];
-    }
-    cout<<ans/2;
+
+    cout << ans;
     return 0;
 }
