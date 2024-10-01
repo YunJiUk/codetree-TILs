@@ -14,7 +14,10 @@ int main() {
         um[tmp]+=1;
     }
     for(auto tmp_um:um){
-        ans+=um[k-tmp_um.first];
+        if(k-tmp_um.first==tmp_um.first){
+            ans+=(um[k-tmp_um.first]*(um[k-tmp_um.first]-1));
+        }
+        else ans+=um[k-tmp_um.first];
     }
     cout<<ans/2;
     return 0;
