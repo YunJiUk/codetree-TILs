@@ -18,7 +18,7 @@ int main() {
     for(int i=1;i<=n;i++){
         for(int j=1;j<=m;j++){
             //ㄱ
-            if(i+1<=n && j+1<=n) {
+            if(i+1<=n && j+1<=m) {
                 int a = arr[i][j], b=arr[i+1][j], c=arr[i][j+1], d=arr[i+1][j+1];
                 ans=max(ans,max(a+b+c,max(a+b+d,max(a+c+d,b+c+d))));
             }
