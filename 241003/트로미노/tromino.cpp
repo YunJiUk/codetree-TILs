@@ -18,18 +18,16 @@ int main() {
     for(int i=1;i<=n;i++){
         for(int j=1;j<=m;j++){
             //ㄱ
-            if(i+1>n || j+1>n) continue;
-            else{
+            if(i+1<=n && j+1<=n) {
                 int a = arr[i][j], b=arr[i+1][j], c=arr[i][j+1], d=arr[i+1][j+1];
                 ans=max(ans,max(a+b+c,max(a+b+d,max(a+c+d,b+c+d))));
             }
-            if(i+2 >n) continue;
-            else{
+            if(i+2 <=n) {
                 int a=arr[i][j]+arr[i+1][j]+arr[i+2][j];
                 ans=max(ans,a);
             }
-            if(j+2>m) continue;
-            else{
+            
+            if(j+2<=m) {
                 int a = arr[i][j]+arr[i][j+1]+arr[i][j+2];
                 ans=max(ans,a);
             }
