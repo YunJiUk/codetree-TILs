@@ -23,7 +23,7 @@ int main() {
     }
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
-            if(!visited[i][j]){
+            if(visited[i][j]==false){
                 int now_num=arr[i][j],tmp_cnt=1;
                 queue<pos> q;
                 q.push({i,j});
@@ -36,7 +36,7 @@ int main() {
                         int nc = now.col+dc[k];
                         if(nr<=0 || nc<=0 || nr>n||nc>n) continue;
                         if(visited[nr][nc]) continue;
-                        if(arr[nc][nr]!=now_num) continue;
+                        if(arr[nr][nc]!=now_num) continue;
                         q.push({nr,nc});
                         visited[nr][nc]=1;
                         tmp_cnt++;
